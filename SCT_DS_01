@@ -1,0 +1,17 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+url = 'https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json'
+data = pd.read_json(url)
+
+# Let's say we want to visualize the distribution of population by country
+country_populations = data['value'].groupby(data['country']).sum()
+
+# Create a bar chart
+plt.figure(figsize=(10, 6))
+country_populations.plot(kind='bar')
+plt.title('Distribution of Population by Country')
+plt.xlabel('Country')
+plt.ylabel('Population')
+plt.show()
